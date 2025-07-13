@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { exampleUI } from "@/data/exampleUI";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,6 +7,7 @@ import type { FormBoxProps } from "@/interfaces/FormBoxInterfaces";
 import z from "zod";
 import { getInputValueSchema, normalizeName } from "@/schemas/example";
 import { ExampleForm } from "@/components/exampleForm";
+import { Button } from "@/components/ui/button";
 
 
 export function buildValidationSchema(formBoxes: FormBoxProps[]) {
@@ -76,6 +77,9 @@ export function extractDefaultValues(formBoxes: FormBoxProps[]) {
 
 const HomeView: React.FC = () => {
   const validationSchema = React.useMemo(() => buildValidationSchema(exampleUI), [exampleUI]);
+  const description = `This form generator is a dynamic React-based form builder that automatically generates complex multi-section forms from declarative configuration objects,
+    complete with real-time validation using Zod schemas and React Hook Form. The system supports various input types (text, select, checkbox, radio, etc.), organizes content into
+    hierarchical boxes and sections, and provides a complete form lifecycle with default values, validation rules, and submission handling.`;
 
   const defaultValues = React.useMemo(() => {
     return extractDefaultValues(exampleUI);
@@ -89,10 +93,21 @@ const HomeView: React.FC = () => {
 
 
   return (
-  <div className="w-full mx-auto px-5 pb-10">
+  <div className="w-full mx-auto px-20 pb-10">
     <FormProvider {...methods}>
-      <div className="py-4">
-        <Card className="shadow-sm border-none rounded-none">
+      <div className="py-4 mt-8">
+        <Card>
+          <CardHeader className="flex flex-col items-center justify-center gap-y-10 w-full mt-2">
+            <div className="flex flex-col gap-y-2">
+              <CardTitle className="font-extrabold text-[32px] w-full text-foreground py-3 text-center">Automated Form Generation</CardTitle>
+              <CardDescription className="px-42 text-md">{description}</CardDescription>
+            </div>
+            <div className="flex px-2 justify-end w-full gap-x-5">
+              <a href="#form-example"><Button className="cursor-pointer" variant="secondary">Example</Button></a>
+              <a href="https://shaan-portfolio-ten.vercel.app/"
+                target="_blank"><Button className="cursor-pointer">About Me</Button></a>
+            </div>
+          </CardHeader>
           <CardContent>
             <ExampleForm />
           </CardContent>
