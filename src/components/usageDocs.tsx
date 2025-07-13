@@ -1,5 +1,6 @@
 import { AccordionContent } from "@radix-ui/react-accordion"
 import { Accordion, AccordionItem, AccordionTrigger } from "./ui/accordion"
+import { InterfacesDocs } from "./usageAccordion/interfacesDocs"
 
 const UsageDocs: React.FC = () => {
   return(
@@ -11,7 +12,7 @@ const UsageDocs: React.FC = () => {
         <AccordionItem value="item-1">
           <AccordionTrigger>Interfaces</AccordionTrigger>
           <AccordionContent>
-            Yes it does
+            <InterfacesDocs/>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
