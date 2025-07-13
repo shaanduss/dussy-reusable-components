@@ -45,12 +45,12 @@ export const InterfacesDocs = () => {
       <CardContent className="space-y-8">
         {/* How to use the Form Generator Section */}
         <div>
-          <h3 className="text-xl font-semibold mb-2">How to use the Form Generator</h3>
+          <h3 className="text-md md:text-xl font-semibold mb-2">How to use the Form Generator</h3>
           <p className="mb-4">
             First you would need to define a dictionary array of the type <code>FormBoxProps[]</code>. Let's unpack what these props include:
           </p>
 
-          <h4 className="text-lg font-semibold mb-2">FormBoxProps</h4>
+          <h4 className="text-md md:text-lg font-semibold mb-2">FormBoxProps</h4>
           <p className="mb-4">
             So a <code>FormBox</code> consists of sections and its own name, as seen here in the props. Essentially the form design is top-down:
           </p>
@@ -64,7 +64,7 @@ export const InterfacesDocs = () => {
             {FormBoxPropsCode}
           </pre>
 
-          <h4 className="text-lg font-semibold mb-2">FormSectionProps</h4>
+          <h4 className="text-md md:text-lg font-semibold mb-2">FormSectionProps</h4>
           <p className="mb-4">
             As you could imagine, here we just have a name for the section and the blocks that its made up of.
           </p>
@@ -85,7 +85,7 @@ export const InterfacesDocs = () => {
         </div>
 
         {/* Table Section */}
-        <div>
+        <div className="overflow-scroll">
           <p className="mb-2">First we need to understand the first few props:</p>
           <table className="w-full border border-border rounded-lg border-separate overflow-hidden" style={{ borderSpacing: 0 }}>
             <thead className="bg-muted text-muted-foreground">

@@ -240,7 +240,7 @@ const RadioInput: React.FC<FormBlockProps> = ({ label, radioOptions, radioOption
           <RadioGroup
             value={field.value ?? defaultVal ?? ""}
             onValueChange={field.onChange} // Correct event handler for RadioGroup
-            className="flex justify-center px-4 my-2 gap-10 h-full items-center"
+            className="flex flex-col md:flex-row justify-center px-4 my-2 gap-y-5 gap-x-10 h-full md:items-center"
           >
             {radioOptions?.map((option, idx) => (
               <div className="flex items-center gap-2" key={option}>

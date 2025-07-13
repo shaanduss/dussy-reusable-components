@@ -94,14 +94,14 @@ const HomeView: React.FC = () => {
 
 
   return (
-  <div className="w-full mx-auto px-20 pb-10">
+  <div className="w-full mx-auto md:px-10 lg:px-20 pb-10">
     <FormProvider {...methods}>
       <div className="py-4 mt-8">
         <Card>
           <CardHeader className="flex flex-col items-center justify-center gap-y-10 w-full mt-2">
             <div className="flex flex-col gap-y-2">
-              <CardTitle className="font-extrabold text-[32px] w-full text-foreground py-3 text-center">Automated Form Generation</CardTitle>
-              <CardDescription className="px-42 text-md">{description}</CardDescription>
+              <CardTitle className="font-extrabold text-2xl lg:text-[32px] w-full text-foreground py-3 text-center">Automated Form Generation</CardTitle>
+              <CardDescription className="px-2 lg:px-42 text-md lg:text-lg">{description}</CardDescription>
             </div>
             <div className="flex px-2 justify-end w-full gap-x-5">
               <a href="#form-example"><Button className="cursor-pointer" variant="secondary">Example</Button></a>

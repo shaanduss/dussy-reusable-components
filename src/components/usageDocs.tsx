@@ -6,7 +6,7 @@ const UsageDocs: React.FC = () => {
   return(
     <div className="w-full pl-3">
       <div className="w-full">
-        <p className="font-extrabold font-pj tracking-tight text-[28px] w-full text-left text-foreground py-3">Usage Documentation</p>
+        <p className="font-extrabold font-pj tracking-tight text-xl lg:text-[28px] w-full text-left text-foreground py-3">Usage Documentation</p>
       </div>
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">

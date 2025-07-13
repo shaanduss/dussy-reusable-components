@@ -11,7 +11,6 @@
 .labelBox {
   display: flex;          /* flex */
   flex-direction: column; /* flex-col */
-  width: 250px;           /* w-[250px] */
 }
 
 /* labelTitle = "font-semibold text-[#183a63]" - USED ONCE */
