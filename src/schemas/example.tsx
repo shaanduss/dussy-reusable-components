@@ -80,7 +80,9 @@ function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAn
       return isRequired ? baseTel : baseTel.optional();
 
     case "email":
-      return z.string().email("Please enter a valid email address");
+      return isRequired 
+        ? z.string().nonempty("Email is required").email("Please enter a valid email address")
+        : z.string().email("Please enter a valid email address").optional();
 
     case "text":
     case undefined:

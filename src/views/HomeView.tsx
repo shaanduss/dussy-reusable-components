@@ -77,19 +77,20 @@ export function extractDefaultValues(formBoxes: FormBoxProps[]) {
 
 
 const HomeView: React.FC = () => {
-  const validationSchema = React.useMemo(() => buildValidationSchema(exampleUI), [exampleUI]);
+  const validationSchema = React.useMemo(() => buildValidationSchema(exampleUI), []);
   const description = `This form generator is a dynamic React-based form builder that automatically generates complex multi-section forms from declarative configuration objects,
     complete with real-time validation using Zod schemas and React Hook Form. The system supports various input types (text, select, checkbox, radio, etc.), organizes content into
     hierarchical boxes and sections, and provides a complete form lifecycle with default values, validation rules, and submission handling.`;
 
   const defaultValues = React.useMemo(() => {
     return extractDefaultValues(exampleUI);
-  }, [exampleUI]);
+  }, []);
 
   const methods = useForm({
     resolver: zodResolver(validationSchema),
-    mode: "onChange",
+    mode: "onBlur",
     defaultValues,
+    reValidateMode: "onChange",
   });
 
 
