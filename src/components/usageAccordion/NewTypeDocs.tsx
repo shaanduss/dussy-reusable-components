@@ -93,4 +93,4 @@ export const NewTypeDocs: React.FC = () => (
   </Card>
 );
 
-export default NewTypeDocs; 
+export default NewTypeDocs;
