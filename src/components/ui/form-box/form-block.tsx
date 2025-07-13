@@ -262,6 +262,19 @@ const CheckboxInput: React.FC<FormBlockProps> = ({ label, checkboxOptions, check
   const { control, formState: { errors } } = useFormContext();
   const cols = (checkboxCols) ? checkboxCols : 1;
 
+  // Create dynamic grid class based on columns
+  const getGridClass = (cols: number) => {
+    switch (cols) {
+      case 1: return "grid-cols-1";
+      case 2: return "grid-cols-2";
+      case 3: return "grid-cols-3";
+      case 4: return "grid-cols-4";
+      case 5: return "grid-cols-5";
+      case 6: return "grid-cols-6";
+      default: return "grid-cols-1";
+    }
+  };
+
   return (
     <div>
       <Label className="labelStyling">{label}</Label>
@@ -272,18 +285,23 @@ const CheckboxInput: React.FC<FormBlockProps> = ({ label, checkboxOptions, check
           name={name!}
           control={control}
           render={({ field }) => (
-            <div className={`grid grid-cols-${cols} gap-y-2 mt-4`}>
+            <div className={`grid ${getGridClass(cols)} gap-y-2 mt-4`}>
               {checkboxOptions.map((option, index) => (
                 <div key={option} className="flex flex-row mb-2.5 gap-3">
                   <Checkbox
                     id={option}
                     checked={field.value?.includes(option) || false}
-                    onChange={() => {
+                    onCheckedChange={(checked) => {
                       const newValue = field.value ? [...field.value] : [];
-                      if (newValue.includes(option)) {
-                        newValue.splice(newValue.indexOf(option), 1);
+                      if (checked) {
+                        if (!newValue.includes(option)) {
+                          newValue.push(option);
+                        }
                       } else {
-                        newValue.push(option);
+                        const index = newValue.indexOf(option);
+                        if (index > -1) {
+                          newValue.splice(index, 1);
+                        }
                       }
                       field.onChange(newValue);
                     }}
