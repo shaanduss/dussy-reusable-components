@@ -7,7 +7,7 @@ export const FormBox: React.FC<FormBoxProps> = (props) => {
   return(
     <div className="w-full">
       {(typeof props.boxName == "string") ?
-      <p className="font-extrabold font-pj tracking-tight text-[24px] w-full text-left border-b text-primary py-3">{props.boxName}</p>
+      <p className="font-extrabold font-pj tracking-tight text-[24px] w-full text-left border-b text-foreground py-3">{props.boxName}</p>
       :
       <>{props.boxName}</>
     }

@@ -17,7 +17,7 @@ export const ExampleForm: FC = () => {
   }, []);
 
   return (
-    <form onSubmit={methods.handleSubmit((data) => console.log("Submit data:", data))} className="flex flex-col items-start pl-3 w-full">
+    <form onSubmit={methods.handleSubmit((data) => console.log("Submit data:", data))} className="flex flex-col items-start pl-3 w-full" id="form-example">
       {formBoxData.map((box) => (
         <FormBox
           key={(typeof box.boxName == "string") ? box.boxName : box.boxNameString}

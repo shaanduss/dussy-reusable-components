@@ -260,6 +260,7 @@ const RadioInput: React.FC<FormBlockProps> = ({ label, radioOptions, radioOption
 
 const CheckboxInput: React.FC<FormBlockProps> = ({ label, checkboxOptions, checkboxOptionsLabels, checkboxCols, name }) => {
   const { control, formState: { errors } } = useFormContext();
+  const cols = (checkboxCols) ? checkboxCols : 1;
 
   return (
     <div>
@@ -271,7 +272,7 @@ const CheckboxInput: React.FC<FormBlockProps> = ({ label, checkboxOptions, check
           name={name!}
           control={control}
           render={({ field }) => (
-            <div className={`grid grid-cols-${checkboxCols || 1} gap-y-2 mt-4`}>
+            <div className={`grid grid-cols-${cols} gap-y-2 mt-4`}>
               {checkboxOptions.map((option, index) => (
                 <div key={option} className="flex flex-row mb-2.5 gap-3">
                   <Checkbox

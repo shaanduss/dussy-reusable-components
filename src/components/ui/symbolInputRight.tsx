@@ -22,15 +22,16 @@ export const SymbolInputRight: React.FC<SymbolInputRightProps> = ({
   onBlur,
 }) => {
   const labelStyling = "mb-3 pl-1 font-semibold";
+  const divStyling = `flex items-center border border-gray rounded-full`;
   return (
     <div>
       <Label className={labelStyling}>{label}</Label>
-      <div className="flex items-center border border-gray rounded-full bg-gray-100">
+      <div className={divStyling}>
         {/* Input */}
         <Input
           type="text"
           placeholder={placeholder}
-          className="flex-1 border-none rounded-l-full bg-white"
+          className="flex-1 border-none rounded-l-full"
           value={value}
           onChange={onChange}
           name={name}
@@ -38,7 +39,7 @@ export const SymbolInputRight: React.FC<SymbolInputRightProps> = ({
         />
 
         {/* Suffix */}
-        <span className="text-gray-500 select-none mx-3">{symbol}</span>
+        <span className="select-none mx-3">{symbol}</span>
       </div>
     </div>
   );
