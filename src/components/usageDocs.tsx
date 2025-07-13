@@ -1,6 +1,9 @@
 import { AccordionContent } from "@radix-ui/react-accordion"
 import { Accordion, AccordionItem, AccordionTrigger } from "./ui/accordion"
-import { InterfacesDocs } from "./usageAccordion/interfacesDocs"
+import { SchemaDocs } from "./usageAccordion/SchemaDocs"
+import { TypesDocs } from "./usageAccordion/TypesDocs"
+import { InterfacesDocs } from "./usageAccordion/InterfacesDocs"
+import { NewTypeDocs } from "./usageAccordion/NewTypeDocs"
 
 const UsageDocs: React.FC = () => {
   return(
@@ -18,19 +21,19 @@ const UsageDocs: React.FC = () => {
         <AccordionItem value="item-2">
           <AccordionTrigger>Schema</AccordionTrigger>
           <AccordionContent>
-            Yes it does
+            <SchemaDocs />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>Existing Input Types</AccordionTrigger>
           <AccordionContent>
-            Yes it does
+            <TypesDocs />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
           <AccordionTrigger>Defining New Input Types</AccordionTrigger>
           <AccordionContent>
-            Yes it does
+            <NewTypeDocs />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

@@ -39,7 +39,7 @@ const FormBlockPropsCode =
   defaultVal?: string;
 }`
 
-export const InterfacesDocs = () => {
+export const InterfacesDocs: React.FC = () => {
   return (
     <Card className="p-6">
       <CardContent className="space-y-8">
