@@ -8,6 +8,7 @@ import z from "zod";
 import { getInputValueSchema, normalizeName } from "@/schemas/example";
 import { ExampleForm } from "@/components/exampleForm";
 import { Button } from "@/components/ui/button";
+import UsageDocs from "@/components/usageDocs";
 
 
 export function buildValidationSchema(formBoxes: FormBoxProps[]) {
@@ -109,6 +110,7 @@ const HomeView: React.FC = () => {
             </div>
           </CardHeader>
           <CardContent>
+            <UsageDocs />
             <ExampleForm />
           </CardContent>
         </Card>
