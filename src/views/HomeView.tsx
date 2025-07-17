@@ -55,11 +55,23 @@ export function extractDefaultValues(formBoxes: FormBoxProps[]) {
           // generate key for input and select sections
           const inputKey = key + "_input";
           const selectKey = key + "_select";
-          defaults[inputKey] = (block.defaultVal) ? block.defaultVal : undefined;
+          defaults[inputKey] = (block.defaultVal) ? block.defaultVal : "";
           defaults[selectKey] = (block.selectDefault) ? block.selectDefault : "";
         }
         else if (block.type == "select" && key) {
           defaults[key] = (block.selectDefault) ? block.selectDefault : "";
+        }
+        else if (block.type == "checkbox" && key) {
+          defaults[key] = [];
+        }
+        else if (block.type == "radio" && key) {
+          if (block.defaultVal && block.radioOptions && block.radioOptions.includes(block.defaultVal)) {
+            defaults[key] = block.defaultVal;
+          } else if (block.radioOptions && block.radioOptions.length > 0) {
+            defaults[key] = block.radioOptions[0];
+          } else {
+            defaults[key] = "";
+          }
         }
         else if (block.defaultVal !== undefined && key) {
           defaults[key] = block.defaultVal;
@@ -101,7 +113,7 @@ const HomeView: React.FC = () => {
         <Card>
           <CardHeader className="flex flex-col items-center justify-center gap-y-10 w-full mt-2">
             <div className="flex flex-col gap-y-2">
-              <CardTitle className="font-extrabold text-2xl lg:text-[32px] w-full text-foreground py-3 text-center">Automated Form Generation</CardTitle>
+              <CardTitle className="font-extrabold text-2xl lg:text-[32px] w-full text-foreground py-3 text-center">React Form Boxes</CardTitle>
               <CardDescription className="px-2 lg:px-42 text-md lg:text-lg">{description}</CardDescription>
             </div>
             <div className="flex px-2 justify-end w-full gap-x-5">
