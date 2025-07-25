@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AccordionContent } from "@radix-ui/react-accordion"
-import { Accordion, AccordionItem, AccordionTrigger } from "./ui/accordion"
+import { Accordion, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { SchemaDocs } from "./usageAccordion/SchemaDocs"
 import { TypesDocs } from "./usageAccordion/TypesDocs"
 import { InterfacesDocs } from "./usageAccordion/InterfacesDocs"

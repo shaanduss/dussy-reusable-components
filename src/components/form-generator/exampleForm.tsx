@@ -1,12 +1,12 @@
 import {useEffect, type FC, useState} from "react";
 import { useFormContext } from "react-hook-form";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { FormBox } from "@/components/ui/form-box/form-box";
 import { ListCheck } from "lucide-react";
 
 import { exampleUI } from "@/data/exampleUI";
-import { Dialog, DialogContent, DialogTitle, DialogClose } from "./ui/dialog";
-import { Label } from "./ui/label";
+import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 import { extractDefaultValues } from "@/schemas/example";
 
 const formBoxData = exampleUI
