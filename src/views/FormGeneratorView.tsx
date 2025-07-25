@@ -4,11 +4,11 @@ import { exampleUI } from "@/data/exampleUI";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildValidationSchema, extractDefaultValues } from "@/schemas/example";
-import { ExampleForm } from "@/components/exampleForm";
 import { Button } from "@/components/ui/button";
-import UsageDocs from "@/components/usageDocs";
 import { UndoDot } from "lucide-react";
 import { Link } from "react-router-dom";
+import UsageDocs from "@/components/form-generator/usageDocs";
+import { ExampleForm } from "@/components/form-generator/exampleForm";
 
 
 const FormGeneratorView: React.FC = () => {
@@ -38,7 +38,9 @@ const FormGeneratorView: React.FC = () => {
           <CardHeader className="flex flex-col items-center justify-center gap-y-10 w-full mt-2">
             <div className="flex flex-col gap-y-2">
               <CardTitle className="font-extrabold text-2xl lg:text-[32px] w-full text-foreground py-3 text-center">React Form Boxes</CardTitle>
-              <CardDescription className="px-2 lg:px-42 text-md lg:text-lg">{description}</CardDescription>
+              <div className="flex justify-center items-center">
+                <CardDescription className="lg:w-[900px] text-md lg:text-lg">{description}</CardDescription>
+              </div>
             </div>
           </CardHeader>
           <CardContent>
