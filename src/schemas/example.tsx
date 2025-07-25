@@ -65,29 +65,32 @@ export function getInputValueSchema(block: FormBlockProps & { name?: string }): 
 
 function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAny {
   switch (inputType) {
-    case "identification":
-      const baseID = z
-        .string()
-        .nonempty("ID number is required")
-        .regex(/^[A-Z]{1,2}[0-9]{6}[0-9A]$/,
-          "HKID must be in format: A123456(7) or AB123456(7)")
-      return isRequired ? baseID : baseID.optional();
     case "tel":
-      const baseTel = z
-        .string()
-        .nonempty("Phone number is required")
-        .regex(/^\+?[0-9\s\-()]{7,}$/, { message: "Invalid phone number" });
-      return isRequired ? baseTel : baseTel.optional();
+      const baseTel = z.preprocess(
+        (val) => (val === "" ? undefined : val),
+        z.string({
+          message: "Phone number is required"
+        })
+        .min(1, "Phone number is required")
+        .regex(/^\+?[0-9\s\-()]{7,}$/, "Invalid phone number")
+      );
+      return isRequired ? baseTel : baseTel.optional().or(z.literal(""));
 
     case "email":
-      return isRequired
-        ? z.string().nonempty("Email is required").email("Please enter a valid email address")
-        : z.email("Please enter a valid email address").optional();
+      const baseEmail = z.string().email("Please enter a valid email address");
+      return isRequired ? baseEmail : baseEmail.optional().or(z.literal(""));
 
     case "text":
     case undefined:
     default:
-      return isRequired ? z.string().nonempty("This field is required") : z.string().optional();
+      return isRequired
+        ? z.preprocess(
+            (val) => (val === "" ? undefined : val),
+            z.string({
+              message: "This field is required"
+            }).min(1, "This field is required")
+          )
+        : z.string().optional();
   }
 }
 
