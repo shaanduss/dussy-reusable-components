@@ -3,10 +3,11 @@ import { useFormContext } from "react-hook-form";
 import { Button } from "./ui/button";
 import { FormBox } from "@/components/ui/form-box/form-box";
 import { ListCheck } from "lucide-react";
-import { extractDefaultValues } from "@/views/HomeView";
+
 import { exampleUI } from "@/data/exampleUI";
 import { Dialog, DialogContent, DialogTitle, DialogClose } from "./ui/dialog";
 import { Label } from "./ui/label";
+import { extractDefaultValues } from "@/schemas/example";
 
 const formBoxData = exampleUI
 
@@ -17,7 +18,7 @@ export const ExampleForm: FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [submittedData, setSubmittedData] = useState<Record<string, any> | null>(null);
 
-  // Initialize form with Redux state (optional, for drafts)
+  // Initialize form with default values
   useEffect(() => {
     methods.reset(extractDefaultValues(formBoxData));
   }, []);

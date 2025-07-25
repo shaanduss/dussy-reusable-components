@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { FormBlockProps } from "@/interfaces/FormBoxInterfaces";
+import type { FormBlockProps, FormBoxProps } from "@/interfaces/FormBoxInterfaces";
 
 // Define required field names exactly as you assign them (e.g., "first_name", "last_name", etc.)
 const requiredNames = new Set([
@@ -91,8 +91,18 @@ function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAn
   }
 }
 
-export function normalizeName(label: string): string {
-  return label.toLowerCase().trim().replace(/\*+$/, "").trim().replace(/\s+/g, "_");
+function normalizeName(label: string): string {
+ return label
+  .toLowerCase()
+  .trim()
+  .replace(/\*+$/, "") // remove trailing '*'
+  .trim()
+  .replace(/-/g, "")       // Remove all dashes
+  .trim()
+  .replace(/\s+/g, "_") // replace spaces with underscores
+  .trim()
+  .replace(/_+/g, "_") // replace multiple underscores by a single one
+  .trim();
 }
 
 export const getKey = (
@@ -107,3 +117,71 @@ export const getKey = (
   const key = name ? normalizeName(name as string) : baseName;
   return key ?? undefined;
 };
+
+export function buildValidationSchema(formBoxes: FormBoxProps[]) {
+  const shape: Record<string, z.ZodTypeAny> = {};
+
+  formBoxes.forEach((box) => {
+    box.sections.forEach((section) => {
+      section.blocks.forEach((block) => {
+        const key = getKey(block.label, block.labelString, block.name);
+
+        if (block.type === "input-select") {
+          const inputKey = key + "_input";
+          const selectKey = key + "_select";
+
+          shape[inputKey] = getInputValueSchema({ ...block, name: inputKey });
+          shape[selectKey] = getInputValueSchema({ ...block, name: selectKey }).optional();
+        } else {
+          shape[key] = getInputValueSchema({ ...block, name: key });
+        }
+      });
+    });
+  });
+
+  return z.object(shape);
+}
+export function extractDefaultValues(formBoxes: FormBoxProps[]) {
+  const defaults: Record<string, any> = {};
+
+  formBoxes.forEach(box => {
+    box.sections.forEach(section => {
+      section.blocks.forEach(block => {
+        // get key for block
+        const key = getKey(block.label, block.labelString, block.name)
+
+        // handle default value for input-select
+        if (block.type == "input-select" && key) {
+          // generate key for input and select sections
+          const inputKey = key + "_input";
+          const selectKey = key + "_select";
+          defaults[inputKey] = (block.defaultVal) ? block.defaultVal : "";
+          defaults[selectKey] = (block.selectDefault) ? block.selectDefault : "";
+        }
+        else if (block.type == "select" && key) {
+          defaults[key] = (block.selectDefault) ? block.selectDefault : "";
+        }
+        else if (block.type == "checkbox" && key) {
+          defaults[key] = [];
+        }
+        else if (block.type == "radio" && key) {
+          if (block.defaultVal && block.radioOptions && block.radioOptions.includes(block.defaultVal)) {
+            defaults[key] = block.defaultVal;
+          } else if (block.radioOptions && block.radioOptions.length > 0) {
+            defaults[key] = block.radioOptions[0];
+          } else {
+            defaults[key] = "";
+          }
+        }
+        else if (block.defaultVal !== undefined && key) {
+          defaults[key] = block.defaultVal;
+        }
+        else if (key){
+          defaults[key] = "";
+        }
+      });
+    });
+  });
+
+  return defaults;
+}
