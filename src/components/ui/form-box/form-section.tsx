@@ -2,7 +2,7 @@ import type { FormBlockProps, FormSectionProps } from "@/interfaces/FormBoxInter
 import { Label } from "../label"
 import { FormBlock } from "./form-block"
 import React from "react";
-import { normalizeName } from "@/schemas/example";
+import { getKey } from "@/schemas/example";
 
 interface FullRowFormBlockProps extends FormBlockProps {
   name?: string;
@@ -40,14 +40,14 @@ export const FormSection: React.FC<FormSectionProps> = (props) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-8 font-medium w-full md:pr-20">
         {/* Map Blocks */}
         {props.blocks.map((block) => {
-          const baseName = (typeof block.label === "string" && block.label.length != 0) ? normalizeName(block.label as string):normalizeName(block.labelString as string);
+          const blockKey = getKey(block.label, block.labelString, block.name)
           return(
-            <React.Fragment key={baseName}>
+            <React.Fragment key={blockKey}>
             {(block.layout && block.layout == "full-row") ?
-              <FullRowFormBlock {...block} name={baseName} /> :
+              <FullRowFormBlock {...block} name={blockKey} /> :
               <FormBlock
                {...block}
-                name={baseName}
+                name={blockKey}
               />
             }
             {(block.layout && block.layout == "row-self") ?

@@ -80,9 +80,9 @@ function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAn
       return isRequired ? baseTel : baseTel.optional();
 
     case "email":
-      return isRequired 
+      return isRequired
         ? z.string().nonempty("Email is required").email("Please enter a valid email address")
-        : z.string().email("Please enter a valid email address").optional();
+        : z.email("Please enter a valid email address").optional();
 
     case "text":
     case undefined:
@@ -94,3 +94,16 @@ function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAn
 export function normalizeName(label: string): string {
   return label.toLowerCase().trim().replace(/\*+$/, "").trim().replace(/\s+/g, "_");
 }
+
+export const getKey = (
+  label: string | React.ReactNode,
+  labelString?: string,
+  name?: string
+) => {
+  const baseName =
+    typeof label === "string" && label.length !== 0
+      ? normalizeName(label as string)
+      : normalizeName(labelString as string);
+  const key = name ? normalizeName(name as string) : baseName;
+  return key ?? undefined;
+};

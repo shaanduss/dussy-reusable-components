@@ -5,7 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { FormBoxProps } from "@/interfaces/FormBoxInterfaces";
 import z from "zod";
-import { getInputValueSchema, normalizeName } from "@/schemas/example";
+import { getInputValueSchema, getKey } from "@/schemas/example";
 import { ExampleForm } from "@/components/exampleForm";
 import { Button } from "@/components/ui/button";
 import UsageDocs from "@/components/usageDocs";
@@ -17,7 +17,7 @@ export function buildValidationSchema(formBoxes: FormBoxProps[]) {
   formBoxes.forEach((box) => {
     box.sections.forEach((section) => {
       section.blocks.forEach((block) => {
-        const key = typeof block.label === "string" ? normalizeName(block.label) : "field";
+        const key = getKey(block.label, block.labelString, block.name);
 
         if (block.type === "input-select") {
           const inputKey = key + "_input";
