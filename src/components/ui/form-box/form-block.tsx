@@ -4,13 +4,12 @@ import { Input } from "../input";
 import { Label } from "../label";
 import { RadioGroup, RadioGroupItem } from "../radio-group";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../select";
-
+import { SymbolInputLeft } from "../symbolInputLeft";
 import { SymbolInputRight } from "../symbolInputRight";
 import type { FormBlockProps } from "@/interfaces/FormBoxInterfaces";
 import { Button } from "../button";
 import { Checkbox } from "../checkbox";
 import { Textarea } from "../textarea";
-import { SymbolInputLeft } from "../symbolInputLeft";
 
 type RHFError = { message?: string } | string | undefined;
 const ErrorText = ({ error }: { error?: RHFError }) => {
@@ -20,66 +19,121 @@ const ErrorText = ({ error }: { error?: RHFError }) => {
   return null;
 };
 
-const AddressInput = ({ label, labelString }: { label: string | React.ReactNode; labelString?: string }) => {
-  const { register } = useFormContext();
+// AddressInput
+const AddressInput = ({
+  label,
+  labelString,
+  name,
+}: {
+  label: string | React.ReactNode;
+  labelString?: string;
+  name?: string;
+}) => {
+  const { control, formState: {} } = useFormContext();
+  const blockKey = name!;
 
   return (
     <div>
-      {typeof label === "string" ? <Label className="labelStyling">{label}</Label> : label}
+      {typeof label === "string" ? (
+        <Label className="labelStyling">{label}</Label>
+      ) : (
+        label
+      )}
       <div className="flex flex-col gap-y-2">
         {[1, 2, 3].map((line) => (
-          <Input
-            key={line}
-            type="text"
-            className="rounded-full"
-            placeholder={typeof label === "string" ? `${label} - Line ${line}` : `${labelString} - Line ${line}`}
-            {...register(`${typeof label === "string" ? label.toLowerCase().replace(/\s+/g, "_") : "address_line"}_${line}`)}
+          <Controller
+            key={`${blockKey}_${line}`}
+            name={`${blockKey}_${line}`}
+            control={control}
+            render={({ field }) => (
+              <Input
+                type="text"
+                className="rounded-full"
+                placeholder={
+                  typeof label === "string"
+                    ? `${label} - Line ${line}`
+                    : `${labelString} - Line ${line}`
+                }
+                {...field}
+              />
+            )}
           />
         ))}
+
         <div className="flex flex-row gap-2">
-          <Select>
-            <SelectTrigger className="w-full rounded-full">
-              <SelectValue placeholder="District" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="new-territories">Tseung Kwan O</SelectItem>
-                <SelectItem value="kowloon">Hung Hom</SelectItem>
-                <SelectItem value="hk-island">Sheung Wan</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger className="w-full rounded-full">
-              <SelectValue placeholder="Region" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="new-territories">New Territories</SelectItem>
-                <SelectItem value="kowloon">Kowloon</SelectItem>
-                <SelectItem value="hk-island">HK Island</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <Controller
+            name={`${blockKey}_district`}
+            control={control}
+            render={({ field }) => (
+              <Select
+                value={field.value ?? ""}
+                onValueChange={field.onChange}
+                onOpenChange={(open) => {
+                  if (!open) field.onBlur();
+                }}
+              >
+                <SelectTrigger className="w-full rounded-full">
+                  <SelectValue placeholder="District" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="new-territories">
+                      Tseung Kwan O
+                    </SelectItem>
+                    <SelectItem value="kowloon">Hung Hom</SelectItem>
+                    <SelectItem value="hk-island">Sheung Wan</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          <Controller
+            name={`${blockKey}_region`}
+            control={control}
+            render={({ field }) => (
+              <Select
+                value={field.value ?? ""}
+                onValueChange={field.onChange}
+                onOpenChange={(open) => {
+                  if (!open) field.onBlur();
+                }}
+              >
+                <SelectTrigger className="w-full rounded-full">
+                  <SelectValue placeholder="Region" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="new-territories">
+                      New Territories
+                    </SelectItem>
+                    <SelectItem value="kowloon">Kowloon</SelectItem>
+                    <SelectItem value="hk-island">HK Island</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
         </div>
       </div>
     </div>
   );
 };
 
+// SelectInput: add onOpenChange
 const SelectInput: React.FC<FormBlockProps> = ({ label, inputPlaceholder, selectOptions, selectOptionsLabels, name }) => {
   const { control, formState: { errors } } = useFormContext();
 
   return (
     <div>
-      <Label className="labelStyling">{label}</Label>
+      {typeof label === "string" ? <Label className="labelStyling">{label}</Label> : label}
       <Controller
         name={name!}
         control={control}
         render={({ field }) => (
           <Select
             value={field.value ?? ""}
-            onValueChange={field.onChange}  // Correct event handler for your Select component
+            onValueChange={field.onChange}
+            onOpenChange={(open) => { if (!open) field.onBlur(); }}
           >
             <SelectTrigger className="w-full rounded-full">
               <SelectValue placeholder={inputPlaceholder} />
@@ -101,6 +155,7 @@ const SelectInput: React.FC<FormBlockProps> = ({ label, inputPlaceholder, select
   );
 };
 
+// SymbolInputLeftWrapper: add onBlur
 const SymbolInputLeftWrapper: React.FC<FormBlockProps> = ({ label, inputSymbol, inputPlaceholder, name }) => {
   const { control, formState: { errors } } = useFormContext();
 
@@ -111,11 +166,12 @@ const SymbolInputLeftWrapper: React.FC<FormBlockProps> = ({ label, inputSymbol, 
         control={control}
         render={({ field }) => (
           <SymbolInputLeft
-            label={typeof label === "string" ? label : "error"}
+            label={label}
             symbol={inputSymbol}
             placeholder={inputPlaceholder || ""}
             {...field}
             value={field.value ?? ""}
+            onBlur={field.onBlur}
           />
         )}
       />
@@ -124,6 +180,7 @@ const SymbolInputLeftWrapper: React.FC<FormBlockProps> = ({ label, inputSymbol, 
   );
 };
 
+// SymbolInputRightWrapper: add onBlur
 const SymbolInputRightWrapper: React.FC<FormBlockProps> = ({ label, inputSymbol, inputPlaceholder, name }) => {
   const { control, formState: { errors } } = useFormContext();
 
@@ -134,11 +191,12 @@ const SymbolInputRightWrapper: React.FC<FormBlockProps> = ({ label, inputSymbol,
         control={control}
         render={({ field }) => (
           <SymbolInputRight
-            label={typeof label === "string" ? label : "error"}
+            label={label}
             symbol={inputSymbol}
             placeholder={inputPlaceholder || ""}
             {...field}
             value={field.value ?? ""}
+            onBlur={field.onBlur}
           />
         )}
       />
@@ -147,6 +205,7 @@ const SymbolInputRightWrapper: React.FC<FormBlockProps> = ({ label, inputSymbol,
   );
 };
 
+// InputOnly: add onBlur
 const InputOnly: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputType, name }) => {
   const { control, formState: { errors } } = useFormContext();
 
@@ -161,6 +220,7 @@ const InputOnly: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputTyp
             {...field}
             value={field.value ?? ""}
             onChange={field.onChange}
+            onBlur={field.onBlur}
             type={inputType || "text"}
             placeholder={inputPlaceholder || ""}
             className="rounded-full"
@@ -172,6 +232,7 @@ const InputOnly: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputTyp
   );
 };
 
+// InputSelect: add onBlur to Input, onOpenChange to Select
 const InputSelect: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputType, selectOptions, selectOptionsLabels, name }) => {
   const { control, formState: { errors } } = useFormContext();
   const inputKey = name! + "_input";
@@ -189,6 +250,7 @@ const InputSelect: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputT
               {...field}
               value={field.value ?? ""}
               onChange={field.onChange}
+              onBlur={field.onBlur}
               type={inputType || "text"}
               placeholder={inputPlaceholder || ""}
               className="rounded-full"
@@ -201,7 +263,8 @@ const InputSelect: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputT
           render={({ field }) => (
             <Select
               value={field.value ?? ""}
-              onValueChange={field.onChange} // Correct event handler
+              onValueChange={field.onChange}
+              onOpenChange={(open) => { if (!open) field.onBlur(); }}
             >
               <SelectTrigger className="basis-[30%] rounded-full">
                 <SelectValue />
@@ -227,11 +290,76 @@ const InputSelect: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputT
   );
 };
 
+// SymbolLeftInputSelect
+const SymbolLeftInputSelect: React.FC<FormBlockProps> = ({ label, inputPlaceholder, inputType, selectOptions, selectOptionsLabels, name, inputSymbol }) => {
+  const { control, formState: { errors } } = useFormContext();
+  const inputKey = name! + "_input";
+  const selectKey = name! + "_select";
+  const divStyling = "flex items-center border border-gray rounded-full bg-gray-100 basis-[76%]";
+  const symbolStyling = "text-gray-500 select-none mx-4";
+  const inputStyling = "flex-1 border-none bg-white rounded-r-full";
+
+  return (
+    <div>
+      <Label className="labelStyling">{label}</Label>
+      <div className="flex gap-2">
+        <Controller
+          name={inputKey}
+          control={control}
+          render={({ field }) => (
+            <div className={divStyling}>
+              <span className={symbolStyling}>{inputSymbol}</span>
+              <Input
+                {...field}
+                value={field.value ?? ""}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                type={inputType || "text"}
+                placeholder={inputPlaceholder || ""}
+                className={inputStyling}
+              />
+            </div>
+          )}
+        />
+        <Controller
+          name={selectKey}
+          control={control}
+          render={({ field }) => (
+            <Select
+              value={field.value ?? ""}
+              onValueChange={field.onChange}
+              onOpenChange={(open) => { if (!open) field.onBlur(); }}
+            >
+              <SelectTrigger className="basis-[24%] rounded-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {selectOptions?.map((option, idx) => (
+                  <SelectItem key={option} value={option}>
+                    {selectOptionsLabels ? selectOptionsLabels[idx] : option}
+                  </SelectItem>
+                )) ?? "You need to provide select options"}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      </div>
+      {(errors?.[inputKey] || errors?.[selectKey]) && (
+        <div className="text-red-600 text-sm">
+          <ErrorText error={errors?.[inputKey]} />
+          <ErrorText error={errors?.[selectKey]} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+// RadioInput: add onBlur to RadioGroup
 const RadioInput: React.FC<FormBlockProps> = ({ label, radioOptions, radioOptionsLabels, name, defaultVal }) => {
   const { control, formState: { errors } } = useFormContext();
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Label className="block font-semibold">{label}</Label>
       <Controller
         name={name!}
@@ -239,41 +367,31 @@ const RadioInput: React.FC<FormBlockProps> = ({ label, radioOptions, radioOption
         render={({ field }) => (
           <RadioGroup
             value={field.value ?? defaultVal ?? ""}
-            onValueChange={field.onChange} // Correct event handler for RadioGroup
-            className="flex flex-col md:flex-row justify-center px-4 my-2 gap-y-5 gap-x-10 h-full md:items-center"
+            onValueChange={field.onChange}
+            onBlur={field.onBlur}
+            className="flex justify-center px-4 my-2 gap-10 h-full items-center"
           >
             {radioOptions?.map((option, idx) => (
               <div className="flex items-center gap-2" key={option}>
                 <RadioGroupItem value={option} id={`r-${idx}`} />
-                <Label htmlFor={`r-${idx}`}>
-                  {radioOptionsLabels ? radioOptionsLabels[idx] : option}
-                </Label>
+                <Label htmlFor={`r-${idx}`}>{radioOptionsLabels ? radioOptionsLabels[idx] : option}</Label>
               </div>
             ))}
           </RadioGroup>
         )}
       />
-      <ErrorText error={errors?.[name!]} />
+      <div className="mt-1">
+        <ErrorText error={errors?.[name!]} />
+      </div>
     </div>
   );
 };
 
+// CheckboxInput: add onBlur to each Checkbox
 const CheckboxInput: React.FC<FormBlockProps> = ({ label, checkboxOptions, checkboxOptionsLabels, checkboxCols, name }) => {
   const { control, formState: { errors } } = useFormContext();
   const cols = (checkboxCols) ? checkboxCols : 1;
-
-  // Create dynamic grid class based on columns
-  const getGridClass = (cols: number) => {
-    switch (cols) {
-      case 1: return "grid-cols-1";
-      case 2: return "grid-cols-2";
-      case 3: return "grid-cols-3";
-      case 4: return "grid-cols-4";
-      case 5: return "grid-cols-5";
-      case 6: return "grid-cols-6";
-      default: return "grid-cols-1";
-    }
-  };
+  const gridCols = "grid-cols-" + cols;
 
   return (
     <div>
@@ -285,26 +403,27 @@ const CheckboxInput: React.FC<FormBlockProps> = ({ label, checkboxOptions, check
           name={name!}
           control={control}
           render={({ field }) => (
-            <div className={`grid ${getGridClass(cols)} gap-y-2 mt-4`}>
+            <div className={`grid ${gridCols} gap-y-2 mt-4`}>
               {checkboxOptions.map((option, index) => (
                 <div key={option} className="flex flex-row mb-2.5 gap-3">
                   <Checkbox
                     id={option}
                     checked={field.value?.includes(option) || false}
                     onCheckedChange={(checked) => {
-                      const newValue = field.value ? [...field.value] : [];
+                      const newValue = (field.value && Array.isArray(field.value)) ? [...field.value] : [];
                       if (checked) {
                         if (!newValue.includes(option)) {
                           newValue.push(option);
                         }
                       } else {
-                        const index = newValue.indexOf(option);
-                        if (index > -1) {
-                          newValue.splice(index, 1);
+                        const idx = newValue.indexOf(option);
+                        if (idx > -1) {
+                          newValue.splice(idx, 1);
                         }
                       }
                       field.onChange(newValue);
                     }}
+                    onBlur={field.onBlur}
                   />
                   <Label className="font-semibold">{checkboxOptionsLabels ? checkboxOptionsLabels[index] : option}</Label>
                 </div>
@@ -338,6 +457,7 @@ const ButtonInput: React.FC<FormBlockProps> = ({ buttonIcon, buttonText, name })
             className="rounded-full"
             type="text"
             placeholder="Enter text"
+            onBlur={field.onBlur}
           />
         )}
       />
@@ -369,7 +489,7 @@ const InputLabel: React.FC<FormBlockProps> = ({ label, inputLabel, name }) => {
           name={name!}
           control={control}
           render={({ field }) => (
-            <Input {...field} value={field.value ?? ""} className="rounded-full" type="number" />
+            <Input {...field} value={field.value ?? ""} className="rounded-full" type="number" onBlur={field.onBlur} />
           )}
         />
         <Label>{inputLabel}</Label>
@@ -389,7 +509,7 @@ const TextAreaInput: React.FC<FormBlockProps> = ({ label, inputPlaceholder, name
         name={name!}
         control={control}
         render={({ field }) => (
-          <Textarea {...field} className="rounded-4xl px-4 py-3" placeholder={inputPlaceholder} />
+          <Textarea {...field} className="rounded-4xl px-4 py-3" placeholder={inputPlaceholder} onBlur={field.onBlur} />
         )}
       />
       <ErrorText error={errors?.[name!]} />
@@ -404,6 +524,7 @@ const formBlockRenderers: Record<string, React.FC<FormBlockProps>> = {
   symbolInputRight: SymbolInputRightWrapper,
   input: InputOnly,
   "input-select": InputSelect,
+  "symbolLeft-input-select": SymbolLeftInputSelect,
   radio: RadioInput,
   checkbox: CheckboxInput,
   "button-input": ButtonInput,

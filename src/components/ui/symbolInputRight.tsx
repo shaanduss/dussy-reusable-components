@@ -4,7 +4,7 @@ import { Label } from "./label";
 
 interface SymbolInputRightProps {
   symbol: string | React.ReactNode;
-  label: string;
+  label: string | React.ReactNode;
   placeholder?: string;
   value?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -25,13 +25,13 @@ export const SymbolInputRight: React.FC<SymbolInputRightProps> = ({
   const divStyling = `flex items-center border border-gray rounded-full`;
   return (
     <div>
-      <Label className={labelStyling}>{label}</Label>
+      {typeof label === "string" ? <Label className={labelStyling}>{label}</Label> : label}
       <div className={divStyling}>
         {/* Input */}
         <Input
           type="text"
           placeholder={placeholder}
-          className="flex-1 border-none rounded-l-full"
+          className="flex-1 border-none rounded-l-full bg-white"
           value={value}
           onChange={onChange}
           name={name}
