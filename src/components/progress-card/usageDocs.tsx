@@ -4,12 +4,11 @@ import { Accordion, AccordionItem, AccordionTrigger } from "@/components/ui/acco
 import { CircularProgressDocs } from "./usageAccordion/CircularProgressDocs";
 
 const UsageDocs: React.FC = () => {
-  const [open, setOpen] = useState<"item-1" | "item-2" | "item-3" | "item-4" | undefined>(undefined);
+  const [open, setOpen] = useState<"item-1" | "item-2" | "item-3" | undefined>(undefined);
   const triggerRefs = {
     "item-1": useRef<HTMLButtonElement>(null),
     "item-2": useRef<HTMLButtonElement>(null),
     "item-3": useRef<HTMLButtonElement>(null),
-    "item-4": useRef<HTMLButtonElement>(null),
   };
 
   useEffect(() => {
@@ -29,28 +28,22 @@ const UsageDocs: React.FC = () => {
         type="single"
         collapsible
         value={open}
-        onValueChange={v => setOpen(v as "item-1" | "item-2" | "item-3" | "item-4" | undefined)}
+        onValueChange={v => setOpen(v as "item-1" | "item-2" | "item-3" | undefined)}
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger ref={triggerRefs["item-1"]}>Interfaces</AccordionTrigger>
+          <AccordionTrigger ref={triggerRefs["item-1"]}>Circular Progress</AccordionTrigger>
           <AccordionContent>
             <CircularProgressDocs/>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger ref={triggerRefs["item-2"]}>Schema</AccordionTrigger>
+          <AccordionTrigger ref={triggerRefs["item-2"]}>Props</AccordionTrigger>
           <AccordionContent>
             <CircularProgressDocs/>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger ref={triggerRefs["item-3"]}>Existing Input Types</AccordionTrigger>
-          <AccordionContent>
-            <CircularProgressDocs/>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-4">
-          <AccordionTrigger ref={triggerRefs["item-4"]}>Defining New Input Types</AccordionTrigger>
+          <AccordionTrigger ref={triggerRefs["item-3"]}>Creating a Progress Card</AccordionTrigger>
           <AccordionContent>
             <CircularProgressDocs/>
           </AccordionContent>

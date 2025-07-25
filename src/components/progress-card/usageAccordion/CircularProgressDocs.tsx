@@ -3,41 +3,15 @@ import {
   CardContent,
 } from "@/components/ui/card";
 
-const FormBoxPropsCode =
-`export interface FormBoxProps {
-  boxName: string | React.ReactNode;
-  sections: FormSectionProps[];
-}`
-
-const FormSectionPropsCode =
-`export interface FormSectionProps {
-  sectionName: string;
-  sectionDescription?: string;
-  blocks: FormBlockProps[];
-}`
-
-const FormBlockPropsCode =
-`export interface FormBlockProps {
-  label: string | React.ReactNode;
-  type: "address" | "select" | "checkbox" | "symbolInputLeft" | "symbolInputRight" | "text" | "radio";
-  layout?: "full-row" | "default" | "row-self";
-  selectOptions?: string[];
-  selectOptionsLabels?: string[];
-  checkboxOptions?: string[];
-  checkboxOptionsLabels?: string[];
-  checkboxCols?: number;
-  inputSymbol?: string | React.ReactNode;
-  inputPlaceholder?: string;
-  inputType?: string;
-  radioOptions?: string[];
-  radioOptionsLabels?: string[];
-  buttonIcon?: React.ReactNode;
-  buttonText?: string;
-  inputLabel?: string;
-  labelString?: string;
-  name?: string;
-  defaultVal?: string;
-}`
+const CircularProgressProps =
+`export const CircularProgress = ({
+  value = 0,
+  size = 48,
+  strokeWidth = 4,
+  showText = true,
+  className = "",
+  color="text-cyan-600"
+})`
 
 export const CircularProgressDocs: React.FC = () => {
   return (
@@ -45,48 +19,25 @@ export const CircularProgressDocs: React.FC = () => {
       <CardContent className="space-y-8">
         {/* How to use the Form Generator Section */}
         <div>
-          <h3 className="text-md md:text-xl font-semibold mb-2">How to use the Form Generator</h3>
+          <h3 className="text-md md:text-xl font-semibold mb-2">What is the Circular Progress Component?</h3>
           <p className="mb-4">
-            First you would need to define a dictionary array of the type <code>FormBoxProps[]</code>. Let's unpack what these props include:
+            It's simply an <code>{"<svg>"}</code>. component that creates a ring with a filled color.
+            The progress starts from the top of the circle and moves clockwise. It is a very simple component where
+            we don't have to worry about how it's made too much. However, there are some props that are worth unpacking.
           </p>
 
-          <h4 className="text-md md:text-lg font-semibold mb-2">FormBoxProps</h4>
-          <p className="mb-4">
+          <h4 className="text-md md:text-lg font-semibold mb-2">Circular Progress Props</h4>
+          {/* <p className="mb-4">
             So a <code>FormBox</code> consists of sections and its own name, as seen here in the props. Essentially the form design is top-down:
-          </p>
-          <p className="mb-4">
-            <code>FormBox</code> → <code>FormSection</code> → <code>FormBlock</code>
-          </p>
-          <p className="mb-4">
-            So a box has several sections and a section has several blocks.
-          </p>
+          </p> */}
           <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
-            {FormBoxPropsCode}
+            {CircularProgressProps}
           </pre>
 
-          <h4 className="text-md md:text-lg font-semibold mb-2">FormSectionProps</h4>
           <p className="mb-4">
-            As you could imagine, here we just have a name for the section and the blocks that its made up of.
+            Below is a table explaining all of these props:
           </p>
-          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm">
-            {FormSectionPropsCode}
-          </pre>
-        </div>
 
-        {/* FormBlockProps Section */}
-        <div>
-          <h3 className="text-xl font-semibold mb-2">FormBlockProps</h3>
-          <p className="mb-4">
-            Here is the tricky part, there are so many different types of blocks we use in our form and we may need very different data. First let's see the props:
-          </p>
-          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm">
-            {FormBlockPropsCode}
-          </pre>
-        </div>
-
-        {/* Table Section */}
-        <div className="overflow-scroll">
-          <p className="mb-2">First we need to understand the first few props:</p>
           <table className="w-full border border-border rounded-lg border-separate overflow-hidden" style={{ borderSpacing: 0 }}>
             <thead className="bg-muted text-muted-foreground">
               <tr>
@@ -97,51 +48,62 @@ export const CircularProgressDocs: React.FC = () => {
             <tbody>
               {[
                 {
-                  prop: "label",
-                  explanation: "This defines the text that will be displayed above whatever input you want.",
-                },
-                {
-                  prop: "type",
-                  explanation: "This essentially allows you to choose what kind of component you want to render.",
-                },
-                {
-                  prop: "layout",
+                  prop: "value",
                   explanation: (
                     <>
-                      The form is generally set to be a grid with 2 columns. A block can be:
-                      <ul className="list-disc ml-5 mt-2 space-y-1">
-                        <li>
-                          <code>default</code> (side by side with another block)
-                        </li>
-                        <li>
-                          <code>row-self</code> which means it occupies only 1 column in the grid but leaves the next blank
-                        </li>
-                        <li>
-                          <code>full-row</code> where it takes up the width of 2 columns
-                        </li>
-                      </ul>
+                      <p>
+                      This is the most important prop for functionality. This value is used to render the progress
+                      fill of the circle. It can be passed using a <code>useState</code> variable. If you've done
+                      so, you would need to render the ProgressCard using <code>useMemo</code> with a dependency array
+                      of: <code>[{"<state_variable>"}]</code>
+                      </p>
                     </>
-                  ),
+                  )
                 },
                 {
-                  prop: "labelString",
+                  prop: "size",
+                  explanation: "Very simple prop allowing you to change the size of the progress circle",
+                },
+                {
+                  prop: "strokeWidth",
+                  explanation: "Simply the width of the ring, pretty simple..."
+                },
+                {
+                  prop: "showText",
                   explanation:
-                    "There are some cases where the label is not a string, we need some kind of string to set the name prop, in the case we provide label as a React Node - we set labelString to set the name prop later on.",
+                    `In the case that you want a number with a percentage sign in the middle of the progress circle,
+                    i.e. 78%, you can specify whether to show the value or not. In our example, we don't use this
+                    feature - I personally think it looks better but feel free to use it.
+                    `,
                 },
                 {
-                  prop: "name",
+                  prop: "className",
                   explanation:
-                    "As just mentioned, this uses the value of either label or labelString to generate a key as an identifier within the form.",
+                    "No explanation needed.",
                 },
                 {
-                  prop: "defaultVal",
-                  explanation: (
+                  prop: "color",
+                  explanation:(
                     <>
-                      If the input is meant to have a default value (identification has default value HKID), we can set it here.
-                      <br />
-                      This is not used in all input blocks so check which input types implement it and modify accordingly if you need it.
+                      <p> This sets the color of the progress fill for the component. The way you specify this is important,
+                        it has to follow the following format:
+                      </p>
+                      <div className="py-4">
+                        <p>
+                          <code>text-{`color: "text-<tailwind_css_color>"`}</code>
+                        </p>
+                        <p className="mt-2 font-bold">
+                          or
+                        </p>
+                        <p className="mt-2">
+                          <code>text-{`color: "text-[#<hex_color>]"`}</code>
+                        </p>
+                      </div>
+                      <p>
+                        if you want to use custom colors.
+                      </p>
                     </>
-                  ),
+                  )
                 },
               ].map(({ prop, explanation }) => (
                 <tr key={prop} className="even:bg-muted/50">
