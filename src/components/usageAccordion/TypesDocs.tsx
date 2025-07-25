@@ -153,7 +153,7 @@ export const TypesDocs: React.FC = () => (
       <div>
         <h3 className="text-lg font-semibold mb-2">Input</h3>
         <p className="mb-2">Standard input. Props: <code>inputPlaceholder</code> and <code>inputType</code> (e.g., "text", "email").</p>
-        <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
+        <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
 {`<input placeholder={inputPlaceholder} type={inputType} />`}
         </pre>
         <ExampleFormBlock

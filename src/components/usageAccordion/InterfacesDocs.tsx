@@ -60,7 +60,7 @@ export const InterfacesDocs: React.FC = () => {
           <p className="mb-4">
             So a box has several sections and a section has several blocks.
           </p>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
             {FormBoxPropsCode}
           </pre>
 
@@ -68,7 +68,7 @@ export const InterfacesDocs: React.FC = () => {
           <p className="mb-4">
             As you could imagine, here we just have a name for the section and the blocks that its made up of.
           </p>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm">
             {FormSectionPropsCode}
           </pre>
         </div>
@@ -79,7 +79,7 @@ export const InterfacesDocs: React.FC = () => {
           <p className="mb-4">
             Here is the tricky part, there are so many different types of blocks we use in our form and we may need very different data. First let's see the props:
           </p>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm">
             {FormBlockPropsCode}
           </pre>
         </div>

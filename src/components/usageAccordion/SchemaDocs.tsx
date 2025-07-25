@@ -10,9 +10,7 @@ const BuildValidationSchemaCode =
   formBoxes.forEach((box) => {
     box.sections.forEach((section) => {
       section.blocks.forEach((block) => {
-        const key = typeof block.label === "string" 
-          ? normalizeName(block.label) 
-          : "field";
+        const key = getKey(block.label, block.labelString, block.name);
 
         if (block.type === "input-select") {
           const inputKey = key + "_input";
@@ -206,7 +204,7 @@ export const SchemaDocs: React.FC = () => {
             <li>Special handling for <code>input-select</code> blocks (creates separate keys for input and select)</li>
             <li>Generating appropriate validation rules for each input type</li>
           </ul>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
             {BuildValidationSchemaCode}
           </pre>
         </div>
@@ -223,7 +221,7 @@ export const SchemaDocs: React.FC = () => {
             <li>Special handling for <code>input-select</code> blocks</li>
             <li>Providing empty string defaults for fields without explicit defaults</li>
           </ul>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
             {ExtractDefaultValuesCode}
           </pre>
         </div>
@@ -285,7 +283,7 @@ export const SchemaDocs: React.FC = () => {
               </tbody>
             </table>
           </div>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mt-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mt-4">
             {GetInputValueSchemaCode}
           </pre>
         </div>
@@ -331,7 +329,7 @@ export const SchemaDocs: React.FC = () => {
               </tbody>
             </table>
           </div>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mt-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mt-4">
             {GetInputTypeSchemaCode}
           </pre>
         </div>
@@ -342,13 +340,13 @@ export const SchemaDocs: React.FC = () => {
           <p className="mb-4">
             To mark fields as required, you need to add their normalized names to the <code>requiredNames</code> set. The normalization process converts labels to lowercase, removes special characters, and replaces spaces with underscores.
           </p>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
             {RequiredNamesCode}
           </pre>
           <p className="mb-4">
             The <code>normalizeName()</code> function handles the conversion:
           </p>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
             {NormalizeNameCode}
           </pre>
           <p className="mb-4">
@@ -367,7 +365,7 @@ export const SchemaDocs: React.FC = () => {
           <p className="mb-4">
             Here's how to integrate the schema system with React Hook Form:
           </p>
-          <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
+          <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-4">
             {UsageExampleCode}
           </pre>
           <p className="mb-4">

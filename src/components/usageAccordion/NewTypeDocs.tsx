@@ -21,7 +21,7 @@ export const NewTypeDocs: React.FC = () => (
         <p className="mb-2">
           Add your new type to the <code>type</code> union in <code>FormBlockProps</code> (in <code>src/interfaces/FormBoxInterfaces.tsx</code>), and add any new props your input needs.
         </p>
-        <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
+        <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
 {`export interface FormBlockProps {
   // ...existing props
   type: "input" | "select" | "myCustomType"; // ← add your type here
@@ -37,7 +37,7 @@ export const NewTypeDocs: React.FC = () => (
         <p className="mb-2">
           In <code>src/components/ui/form-box/form-block.tsx</code>, create a new React component for your input type. Use <code>Controller</code> from <code>react-hook-form</code> to connect it to form state and validation.
         </p>
-        <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
+        <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
 {`const MyCustomInput: React.FC<FormBlockProps> = ({ label, myCustomProp, name }) => {
   const { control, formState: { errors } } = useFormContext();
   return (
@@ -57,7 +57,7 @@ export const NewTypeDocs: React.FC = () => (
 };`}
         </pre>
         <p className="mb-2">Then, add your component to the <code>formBlockRenderers</code> map:</p>
-        <pre className="bg-background text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
+        <pre className="bg-muted text-foreground rounded-md p-4 overflow-x-auto font-mono text-sm mb-2">
 {`const formBlockRenderers: Record<string, React.FC<FormBlockProps>> = {
   // ...existing types
   myCustomType: MyCustomInput,
