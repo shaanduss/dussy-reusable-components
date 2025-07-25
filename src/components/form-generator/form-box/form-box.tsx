@@ -1,6 +1,6 @@
 import type { FormBoxProps } from "@/interfaces/FormBoxInterfaces"
 import { FormSection } from "./form-section"
-import { Separator } from "../separator"
+import { Separator } from "@/components/ui/separator"
 import React from "react"
 
 export const FormBox: React.FC<FormBoxProps> = (props) => {

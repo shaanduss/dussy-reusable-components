@@ -1,15 +1,15 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { Input } from "../input";
-import { Label } from "../label";
-import { RadioGroup, RadioGroupItem } from "../radio-group";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../select";
-import { SymbolInputLeft } from "../symbolInputLeft";
-import { SymbolInputRight } from "../symbolInputRight";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SymbolInputLeft } from "@/components/ui/symbolInputLeft";
+import { SymbolInputRight } from "@/components/ui/symbolInputRight";
 import type { FormBlockProps } from "@/interfaces/FormBoxInterfaces";
-import { Button } from "../button";
-import { Checkbox } from "../checkbox";
-import { Textarea } from "../textarea";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 
 type RHFError = { message?: string } | string | undefined;
 const ErrorText = ({ error }: { error?: RHFError }) => {
