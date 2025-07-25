@@ -1,19 +1,23 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomeView from "./views/HomeView";
 import { ThemeProvider } from "./components/theme-provider";
+import FormGeneratorView from "./views/FormGeneratorView";
+import HomeView from "./views/HomeView";
 
 function App() {
   return (
-    <Router>
-      <ThemeProvider defaultTheme="light">
-        <div className="min-h-screen flex-col">
-          <Routes>
-            <Route path="/" element={<HomeView />} />
-          </Routes>
-        </div>
-      </ThemeProvider>
-    </Router>
+    <div className="bg-muted/20">
+      <Router>
+        <ThemeProvider defaultTheme="light">
+          <div className="min-h-screen flex-col">
+            <Routes>
+              <Route path="/" element={<HomeView />} />
+              <Route path="/form-generator" element={<FormGeneratorView />} />
+            </Routes>
+          </div>
+        </ThemeProvider>
+      </Router>
+    </div>
   );
 }
 
