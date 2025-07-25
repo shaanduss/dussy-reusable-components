@@ -6,7 +6,7 @@ import { ThemeProvider } from "./components/theme-provider";
 function App() {
   return (
     <Router>
-      <ThemeProvider>
+      <ThemeProvider defaultTheme="light">
         <div className="min-h-screen flex-col">
           <Routes>
             <Route path="/" element={<HomeView />} />
