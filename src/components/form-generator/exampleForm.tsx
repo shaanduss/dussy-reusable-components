@@ -1,7 +1,7 @@
 import {useEffect, type FC, useState} from "react";
 import { useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { FormBox } from "@/components/ui/form-box/form-box";
+import { FormBox } from "@/components/form-generator/form-box/form-box";
 import { ListCheck } from "lucide-react";
 
 import { exampleUI } from "@/data/exampleUI";

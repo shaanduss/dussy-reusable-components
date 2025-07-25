@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import { Card, CardContent } from "./card";
-import { Label } from "./label";
-import { Separator } from "./separator";
+import { Card, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import React from "react";
 
 // Define type for our array of blocks
