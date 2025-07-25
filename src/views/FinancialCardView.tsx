@@ -8,9 +8,9 @@ import { ExampleFinancialCards } from "@/components/financial-card/exampleFinanc
 
 
 const FinancialCardView: React.FC = () => {
-  const description = `This form generator is a dynamic React-based form builder that automatically generates complex multi-section forms from declarative configuration objects,
-    complete with real-time validation using Zod schemas and React Hook Form. The system supports various input types (text, select, checkbox, radio, etc.), organizes content into
-    hierarchical boxes and sections, and provides a complete form lifecycle with default values, validation rules, and submission handling.`;
+  const description = `Financial Card is a reusable React component that displays a customizable card with an optional title section and a list of labeled value blocks.
+  It accepts an optional icon, title, and title value with configurable text color, alongside an array of sideBlocks rendered as label-value pairs separated visually.
+  The layout adapts depending on whether the title section is present, ensuring a clean and flexible display suitable for financial or data summary purposes.`;
 
 
   return (

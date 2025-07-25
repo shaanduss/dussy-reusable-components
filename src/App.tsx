@@ -4,6 +4,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import FormGeneratorView from "./views/FormGeneratorView";
 import HomeView from "./views/HomeView";
 import FinancialCardView from "./views/FinancialCardView";
+import ProgressCardView from "./views/ProgressCardView";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route path="/" element={<HomeView />} />
               <Route path="/form-generator" element={<FormGeneratorView />} />
               <Route path="/financial-card" element={<FinancialCardView />} />
+              <Route path="/progress-card" element={<ProgressCardView />} />
             </Routes>
           </div>
         </ThemeProvider>
