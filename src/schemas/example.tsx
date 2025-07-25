@@ -65,11 +65,51 @@ export function getInputValueSchema(block: FormBlockProps & { name?: string }): 
 
 function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAny {
   switch (inputType) {
+    case "identification":
+      const baseID = z.preprocess(
+        (val) => (val === "" ? undefined : val),
+        z.string({
+          message: "ID number is required",
+        })
+        .min(1, "ID number is required")
+        .regex(/^[A-Z]{1,2}[0-9]{6}\([0-9A]\)$/, "HKID must be in format: A123456(7) or AB123456(7)")
+        .refine((value) => {
+          // Remove parentheses
+          let hkid = value.replace(/[()]/g, "");
+
+          // Split into prefix, digits, and check digit
+          const match = hkid.match(/^([A-Z]{1,2})([0-9]{6})([0-9A])$/);
+          if (!match) return false;
+          let [_, prefix, digits, checkDigit] = match;
+
+          // If there is only one character provided
+            // set the first character to a space (value of 36)
+            // this allows our checksum algo to work correctly
+          let chars = prefix.length === 2 ? [prefix[0], prefix[1]] : [' ', prefix[0]];
+          // Convert characters to values
+          let charValues = chars.map(c => c === ' ' ? 36 : c.charCodeAt(0) - 55);
+
+          // Build array of values
+          let allValues = [...charValues, ...digits.split('').map(Number)];
+
+          // Set weights
+          let weights = [9,8,7,6,5,4,3,2];
+          let sum = allValues.reduce((acc, val, idx) => acc + val * weights[idx], 0);
+
+          // Calculate check digit
+          let remainder = sum % 11;
+          let expected = (11 - remainder) % 11;
+          let expectedChar = expected === 10 ? 'A' : expected.toString();
+
+          return checkDigit === expectedChar;
+        }, "Invalid HKID checksum")
+      );
+      return isRequired ? baseID : baseID.optional().or(z.literal(""));
     case "tel":
       const baseTel = z.preprocess(
         (val) => (val === "" ? undefined : val),
         z.string({
-          message: "Phone number is required"
+          message: "Phone number is required",
         })
         .min(1, "Phone number is required")
         .regex(/^\+?[0-9\s\-()]{7,}$/, "Invalid phone number")
@@ -80,6 +120,22 @@ function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAn
       const baseEmail = z.string().email("Please enter a valid email address");
       return isRequired ? baseEmail : baseEmail.optional().or(z.literal(""));
 
+    case "chinese": {
+      const baseChinese = z.preprocess(
+        (val) => (val === "" ? undefined : val),
+        z.string({
+          message: "This field is required",
+        })
+        .min(1, "This field is required")
+        .regex(/^[\u4e00-\u9fff]+$/, "Only Chinese characters are allowed")
+      );
+      if (isRequired) {
+        return baseChinese;
+      } else {
+        return baseChinese.optional().or(z.literal(""));
+      }
+    }
+
     case "text":
     case undefined:
     default:
@@ -87,7 +143,7 @@ function getInputTypeSchema(inputType?: string, isRequired = false): z.ZodTypeAn
         ? z.preprocess(
             (val) => (val === "" ? undefined : val),
             z.string({
-              message: "This field is required"
+              message: "This field is required",
             }).min(1, "This field is required")
           )
         : z.string().optional();
