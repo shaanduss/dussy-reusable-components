@@ -22,7 +22,7 @@ const HomeView: FC = () => {
 
           {/* Links Section */}
           <div className="mt-5">
-            <p className="font-extrabold font-pj tracking-tight text-xl lg:text-[24px] w-full text-left text-foreground py-3">Component List</p>
+            <p className="font-extrabold text-xl lg:text-[24px] w-full text-left text-foreground py-3">Component List</p>
             <ul className="px-5">
               <li className="flex gap-x-3">
                 1.

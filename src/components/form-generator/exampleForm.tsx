@@ -55,7 +55,7 @@ export const ExampleForm: FC = () => {
       </Dialog>
       <form onSubmit={methods.handleSubmit(submitAction)} className="flex flex-col items-start pl-3 w-full" id="form-example">
         <div className="w-full mt-3">
-          <p className="font-extrabold underline font-pj tracking-tight text-xl lg:text-[28px] w-full text-left text-foreground py-3">Example Form</p>
+          <p className="font-extrabold underline text-xl lg:text-[28px] w-full text-left text-foreground py-3">Example Form</p>
         </div>
         {formBoxData.map((box) => (
           <FormBox
