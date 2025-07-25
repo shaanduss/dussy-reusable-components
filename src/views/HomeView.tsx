@@ -34,11 +34,7 @@ const HomeView: FC = () => {
               </li>
               <li className="flex gap-x-3">
                 3.
-                <Link to="/form-generator" className="cursor-pointer">⭕️ Circular Progress </Link>
-              </li>
-              <li className="flex gap-x-3">
-                4.
-                <Link to="/form-generator" className="cursor-pointer">📈 Progress Card</Link>
+                <Link to="/progress-card" className="cursor-pointer">📈 Progress Card</Link>
               </li>
             </ul>
           </div>
