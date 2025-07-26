@@ -16,7 +16,7 @@ const FinancialCardView: React.FC = () => {
   return (
   <div className="w-full mx-auto md:px-10 lg:px-20 pb-10">
       <div className="py-4">
-        <Link to="/"><Button className="my-5"><UndoDot/>Home</Button></Link>
+        <Link to="/"><Button className="my-5 cursor-pointer"><UndoDot/>Home</Button></Link>
         <Card>
           <CardHeader className="flex flex-col items-center justify-center gap-y-10 w-full mt-2">
             <div className="flex flex-col gap-y-2">
