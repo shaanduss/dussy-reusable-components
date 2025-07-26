@@ -51,8 +51,7 @@
   "exports": {
     ".": {
       "import": "./dist/components/index.js",
-      "require": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
+      "require": "./dist/components/index.js"
     }
   },
   "files": [
