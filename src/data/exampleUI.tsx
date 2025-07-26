@@ -1,4 +1,4 @@
-import type { FormBoxProps } from "@/interfaces/FormBoxInterfaces";
+import type { FormBoxProps } from "@/components/form-generator/FormBoxInterfaces";
 
 export const exampleUI: FormBoxProps[] = [
   {
