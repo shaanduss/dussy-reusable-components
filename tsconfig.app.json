@@ -18,9 +18,9 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": false,
-    "outDir": "./dist/components",
+    "outDir": "./dist",
     "declaration": true,
-    "declarationDir": "./dist/components",
+    "declarationDir": "./dist",
     "emitDeclarationOnly": false,
     "jsx": "react-jsx",
 
@@ -32,5 +32,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/components"]
+  "include": ["src"]
 }

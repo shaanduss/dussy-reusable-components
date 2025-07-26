@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardTitle } from "../components/ui/card";
+import { Separator } from "../components/ui/separator";
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 

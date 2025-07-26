@@ -13,12 +13,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/components/index.ts'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'DussyComponents',
       formats: ['es'],
       fileName: () => 'index.js',
     },
-    outDir: 'dist/components',
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       external: [
