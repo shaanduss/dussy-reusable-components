@@ -1,6 +1,5 @@
 {
   "name": "dussy-components",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -45,5 +44,34 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.4"
-  }
+  },
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
+  "types": "dist/components/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/components/index.js",
+      "require": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/components"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Reusable React UI and higher-level components for financial and form-based applications.",
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "financial",
+    "form",
+    "progress",
+    "card",
+    "theme"
+  ],
+  "author": "Shaan (update as needed)",
+  "license": "MIT"
 }

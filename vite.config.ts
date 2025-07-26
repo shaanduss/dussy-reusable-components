@@ -11,4 +11,27 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/components/index.ts'),
+      name: 'DussyComponents',
+      formats: ['es'],
+      fileName: () => 'index.js',
+    },
+    outDir: 'dist/components',
+    emptyOutDir: true,
+    rollupOptions: {
+      external: [
+        'react', 'react-dom', 'clsx', 'lucide-react', 'zod',
+        '@radix-ui/react-accordion', '@radix-ui/react-checkbox', '@radix-ui/react-dialog', '@radix-ui/react-label', '@radix-ui/react-radio-group', '@radix-ui/react-select', '@radix-ui/react-separator', '@radix-ui/react-slot',
+        'react-hook-form', 'tailwind-merge', 'tailwindcss'
+      ],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
+    }
+  }
 })
