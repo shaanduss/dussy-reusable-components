@@ -1,4 +1,4 @@
-import type { FormBoxProps } from "@/components/form-generator/FormBoxInterfaces"
+import type { FormBoxProps } from "@/interfaces/FormBoxInterfaces"
 import { FormSection } from "./form-section"
 import { Separator } from "@/components/ui/separator"
 import React from "react"

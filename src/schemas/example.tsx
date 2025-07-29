@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { FormBlockProps, FormBoxProps } from "@/components/form-generator/FormBoxInterfaces";
+import type { FormBlockProps, FormBoxProps } from "@/interfaces/FormBoxInterfaces";
 
 // Define required field names exactly as you assign them (e.g., "first_name", "last_name", etc.)
 const requiredNames = new Set([

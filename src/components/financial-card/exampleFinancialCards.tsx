@@ -1,5 +1,5 @@
 import React from "react";
-import { FinancialCard, type FinancialCardProps } from "@/components/financial-card/financialCard";
+import { FinancialCard, type FinancialCardProps } from "@/components/financial-card/ui/financialCard";
 import { BadgePercent, BanknoteArrowDown, CircleDollarSign } from "lucide-react";
 
 const repayFinancialCardData: FinancialCardProps[] = [

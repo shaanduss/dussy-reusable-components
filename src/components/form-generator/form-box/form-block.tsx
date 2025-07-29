@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SymbolInputLeft } from "@/components/ui/symbolInputLeft";
 import { SymbolInputRight } from "@/components/ui/symbolInputRight";
-import type { FormBlockProps } from "@/components/form-generator/FormBoxInterfaces";
+import type { FormBlockProps } from "@/interfaces/FormBoxInterfaces";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";

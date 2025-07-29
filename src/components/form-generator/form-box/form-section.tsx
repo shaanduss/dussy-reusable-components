@@ -1,4 +1,4 @@
-import type { FormBlockProps, FormSectionProps } from "@/components/form-generator/FormBoxInterfaces"
+import type { FormBlockProps, FormSectionProps } from "@/interfaces/FormBoxInterfaces"
 import { Label } from "@/components/ui/label"
 import { FormBlock } from "./form-block"
 import React from "react";

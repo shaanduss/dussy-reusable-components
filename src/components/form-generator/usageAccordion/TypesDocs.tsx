@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormBlock } from "@/components/form-generator/form-box/form-block";
 import { Plus, Phone } from "lucide-react";
-import type { FormBlockProps } from "@/components/form-generator/FormBoxInterfaces";
+import type { FormBlockProps } from "@/interfaces/FormBoxInterfaces";
 
 // Helper to wrap a FormBlock in a minimal form context for live examples
 const ExampleFormBlock = (props: FormBlockProps) => {

@@ -1,6 +1,6 @@
 import { ClockFading, Coins, HandCoins } from "lucide-react";
 import type { FC } from "react";
-import { ProgressCard, type ProgressCardProps } from "@/components/progress-card/progressCard";
+import { ProgressCard, type ProgressCardProps } from "@/components/progress-card/ui/progressCard";
 
 
 const cards: ProgressCardProps[] = [

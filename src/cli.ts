@@ -38,12 +38,12 @@ const COMPONENT_MAP: Record<string, { src: string; dest: string }> = {
   },
   // Financial Card
   'financial-card': {
-    src: path.join(__dirname, '../src/components/financial-card'),
+    src: path.join(__dirname, '../src/components/financial-card/ui'),
     dest: 'src/components/financial-card',
   },
   // Progress Card
   'progress-card': {
-    src: path.join(__dirname, '../src/components/progress-card'),
+    src: path.join(__dirname, '../src/components/progress-card/ui'),
     dest: 'src/components/progress-card',
   },
   // UI Components (all)

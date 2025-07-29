@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { CircularProgress } from "@/components/progress-card/circularProgress"
+import { CircularProgress } from "@/components/progress-card/ui/circularProgress"
 import { Label } from "@/components/ui/label"
 
 export interface ProgressCardProps {

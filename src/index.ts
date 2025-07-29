@@ -14,10 +14,10 @@ export * from "./components/ui/symbolInputLeft";
 export * from "./components/ui/symbolInputRight";
 
 // Higher-level components
-export { FinancialCard } from "./components/financial-card/financialCard";
-export { ProgressCard } from "./components/progress-card/progressCard";
-export { CircularProgress } from "./components/progress-card/circularProgress";
+export { FinancialCard } from "./components/financial-card/ui/financialCard";
+export { ProgressCard } from "./components/progress-card/ui/progressCard";
+export { CircularProgress } from "./components/progress-card/ui/circularProgress";
 export { FormBox } from "./components/form-generator/form-box/form-box";
 export { FormBlock } from "./components/form-generator/form-box/form-block";
 export { FormSection } from "./components/form-generator/form-box/form-section";
-export { type FormBoxProps, type FormSectionProps, type FormBlockProps } from "./components/form-generator/FormBoxInterfaces";
+export { type FormBoxProps, type FormSectionProps, type FormBlockProps } from "./interfaces/FormBoxInterfaces";
