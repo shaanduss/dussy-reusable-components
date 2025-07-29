@@ -1,6 +1,6 @@
 {
   "name": "dussy-components",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "type": "module",
   "bin": {
     "dussy-components": "./dist/cli.js"
@@ -67,8 +67,8 @@
     "dist",
     "build-cli.js",
     "src/components/form-generator/form-box",
-    "src/components/financial-card",
-    "src/components/progress-card",
+    "src/components/financial-card/ui",
+    "src/components/progress-card/ui",
     "src/components/ui",
     "src/interfaces/FormBoxInterfaces.tsx"
   ],

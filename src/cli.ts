@@ -91,7 +91,7 @@ program
 
       // Additional step for form-box interfaces
       if (componentName === 'form-box') {
-        const formBoxInterfacesSrc = path.join(__dirname, '../src/interfaces/FormBoxInterfaces.tsx');
+        const formBoxInterfacesSrc = path.join(__dirname, '../src/interfaces/');
         const formBoxInterfacesDest = path.join(cwd, 'src/interfaces');
         if (!fs.existsSync(formBoxInterfacesDest)) {
           fs.mkdirSync(formBoxInterfacesDest, { recursive: true });
