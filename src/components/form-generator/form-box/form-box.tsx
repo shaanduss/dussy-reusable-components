@@ -12,7 +12,7 @@ export const FormBox: React.FC<FormBoxProps> = ({
   nameStyling = "text-foreground"
 }) => {
   return(
-    <div className="w-full" key={(typeof boxName == "string") ? boxName : boxNameString}>
+    <div className="w-full" key={(typeof boxName == "string") ? boxName+"_box" : boxNameString+"_box"}>
       {(typeof boxName == "string") ?
         <p className={cn("font-extrabold text-xl lg:text-[24px] w-full text-left border-b py-3", nameStyling)}>
           {boxName}
