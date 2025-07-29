@@ -1,6 +1,6 @@
 {
   "name": "dussy-components",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "bin": {
     "dussy-components": "./dist/cli.js"
@@ -65,7 +65,11 @@
   },
   "files": [
     "dist",
-    "build-cli.js"
+    "build-cli.js",
+    "src/components/form-generator/form-box",
+    "src/components/financial-card",
+    "src/components/progress-card",
+    "src/components/ui"
   ],
   "publishConfig": {
     "access": "public"
