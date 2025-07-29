@@ -4,14 +4,19 @@ import { Separator } from "../components/ui/separator";
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 
-const HomeView: FC = () => {
-  const descriptionWelcome = `
-    Welcome to Dussy's Reusable Components, a curated collection of handcrafted React components designed with TailwindCSS and
-    ShadCN-UI for seamless integration and rapid development.`
+const descriptionNpm: React.ReactNode = (
+  <div>
+    <p>This npm package: <code className="text-black">dussy-components</code>
+    {`, offers a suite of versatile UI elements, including a dynamic Form Generator that
+    effortlessly creates complex, multi-section forms from simple configuration objects, a sleek Financial Card for data summaries,
+    and an elegant Progress Card showcasing progress visuallywith a customizable circular indicator.`}
+    </p>
+  </div>
+)
 
-  const descriptionNpm = `This npm package offers a suite of versatile UI elements, including a dynamic Form Generator that
-  effortlessly creates complex, multi-section forms from simple configuration objects, a sleek Financial Card for data summaries,
-  and an elegant Progress Card showcasing progress visually with a customizable circular indicator.`
+const HomeView: FC = () => {
+  const descriptionWelcome = `Welcome to Dussy's Reusable Components, a curated collection of
+  handcrafted React components designed with TailwindCSS and ShadCN-UI for seamless integration and rapid development.`
 
   const descriptionCustomization = `Each component is fully customizable, accessible, and thoughtfully built to save you time while
   enhancing your UI/UX. Whether you're building enterprise dashboards, interactive forms, or data displays, these components bring
@@ -36,7 +41,7 @@ const HomeView: FC = () => {
             <CardDescription className="text-md lg:text-lg text-left flex flex-col gap-y-10 mt-2">
               <div className="flex flex-col gap-y-5">
                 <p>{descriptionWelcome} </p>
-                <p>{descriptionNpm} </p>
+                {descriptionNpm}
                 <p>{descriptionCustomization} </p>
                 <p>{descriptionExplore} </p>
               </div>
