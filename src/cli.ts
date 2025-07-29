@@ -87,10 +87,23 @@ program
       if (!fs.existsSync(destDir)) {
         fs.mkdirSync(destDir, { recursive: true });
       }
-      // Copy files/directories
       copyRecursiveSync(mapping.src, destDir);
+
+      // Additional step for form-box interfaces
+      if (componentName === 'form-box') {
+        const formBoxInterfacesSrc = path.join(__dirname, '../src/interfaces/FormBoxInterfaces.tsx');
+        const formBoxInterfacesDest = path.join(cwd, 'src/interfaces');
+        if (!fs.existsSync(formBoxInterfacesDest)) {
+          fs.mkdirSync(formBoxInterfacesDest, { recursive: true });
+        }
+        copyRecursiveSync(formBoxInterfacesSrc, formBoxInterfacesDest);
+      }
+
       console.log(`\n🎉 Successfully added ${component} component(s)!`);
       console.log(`📁 Files copied to: ${destDir}`);
+      if (componentName === 'form-box') {
+        console.log(`📁 Additionally copied interfaces to: src/interfaces`);
+      }
       console.log('\nNext steps:');
       console.log('1. Import the components in your React components');
       console.log('2. Make sure you have the required dependencies installed');
@@ -101,4 +114,4 @@ program
     }
   });
 
-program.parse(); 
+program.parse();
