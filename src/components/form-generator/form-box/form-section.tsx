@@ -29,7 +29,7 @@ export const FormSection: React.FC<FormSectionProps> = ({
   sectionDescription,
   blocks,
   sectionNameString,
-  nameStyling,
+  sectionNameStyling,
   blocksContainerStyling
 }) => {
   return(
@@ -37,7 +37,7 @@ export const FormSection: React.FC<FormSectionProps> = ({
       {/* Label */}
       <div className="flex flex-col w-full md:w-[250px]">
         {(typeof sectionName == "string") ?
-          <Label className={cn("font-semibold text-left pr-1", nameStyling)}>{sectionName}</Label>
+          <Label className={cn("font-semibold text-left pr-1", sectionNameStyling)}>{sectionName}</Label>
           : <div>{sectionName}</div>
         }
         {(sectionDescription) ?

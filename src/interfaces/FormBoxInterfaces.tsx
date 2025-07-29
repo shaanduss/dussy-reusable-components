@@ -26,7 +26,7 @@ export interface FormSectionProps {
   sectionDescription?: string;
   blocks: FormBlockProps[];
   sectionNameString?: string;
-  nameStyling?: string;
+  sectionNameStyling?: string;
   blocksContainerStyling?: string;
 }
 
@@ -35,4 +35,6 @@ export interface FormBoxProps {
   sections: FormSectionProps[];
   boxNameString?: string;
   nameStyling?: string;
+  sectionNameStyling?: string;
+  blocksContainerStyling?: string;
 }

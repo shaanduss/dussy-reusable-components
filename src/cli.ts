@@ -97,6 +97,12 @@ program
           fs.mkdirSync(formBoxInterfacesDest, { recursive: true });
         }
         copyRecursiveSync(formBoxInterfacesSrc, formBoxInterfacesDest);
+        const schemaSrc = path.join(__dirname, '../src/schemas/');
+        const schemaDest = path.join(cwd, 'src/schemas');
+        if (!fs.existsSync(schemaDest)) {
+          fs.mkdirSync(schemaDest, { recursive: true });
+        }
+        copyRecursiveSync(schemaSrc, schemaDest);
       }
 
       console.log(`\n🎉 Successfully added ${component} component(s)!`);

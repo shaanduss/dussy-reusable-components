@@ -9,7 +9,9 @@ export const FormBox: React.FC<FormBoxProps> = ({
   boxName,
   sections,
   boxNameString,
-  nameStyling = "text-foreground"
+  nameStyling = "text-foreground",
+  sectionNameStyling,
+  blocksContainerStyling
 }) => {
   return(
     <div className="w-full" key={(typeof boxName == "string") ? boxName+"_box" : boxNameString+"_box"}>
@@ -24,9 +26,10 @@ export const FormBox: React.FC<FormBoxProps> = ({
       <div className="w-full">
           {sections.map((section, idx) => (
             <React.Fragment key={(typeof section.sectionName == "string") ? section.sectionName : section.sectionNameString}>
-              <FormSection sectionName={section.sectionName}
-                sectionDescription={section.sectionDescription}
-                blocks={section.blocks}
+              <FormSection
+                sectionNameStyling={sectionNameStyling}
+                blocksContainerStyling={blocksContainerStyling}
+                {...section}
               />
               {idx !== sections.length - 1 && <Separator />}
             </React.Fragment>
