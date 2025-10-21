@@ -1,7 +1,21 @@
 export interface FormBlockProps {
   label: string | React.ReactNode;
-  type: "address" | "select" | "checkbox" | "symbolInputLeft" | "symbolInputRight" | "input" | "input-select" | "radio" | "button-input" | "input-label" | "text-area" | "symbolLeft-input-select";
-  layout?: "full-row" | "default" | "row-self";
+  checkboxLabel?: string;
+  type:
+    | "address"
+    | "select"
+    | "checkbox"
+    | "symbolInputLeft"
+    | "symbolInputRight"
+    | "input"
+    | "input-select"
+    | "radio"
+    | "button-input"
+    | "input-label"
+    | "text-area"
+    | "symbolLeft-input-select"
+    | "auto-calculation";
+  layout?: "full-row" | "default" | "row-self-start" | "row-self-end";
   selectOptions?: string[];
   selectOptionsLabels?: string[];
   checkboxOptions?: string[];
@@ -19,6 +33,12 @@ export interface FormBlockProps {
   name?: string;
   defaultVal?: string;
   selectDefault?: string;
+  readOnly?: boolean;
+  calculatedFrom?: string[];
+  calculationFunction?: (values: Record<string, any>) => string;
+  dbColumn?: {
+    [key: string]: string[];
+  };
 }
 
 export interface FormSectionProps {
@@ -28,6 +48,7 @@ export interface FormSectionProps {
   sectionNameString?: string;
   sectionNameStyling?: string;
   blocksContainerStyling?: string;
+  allReadOnly?: boolean;
 }
 
 export interface FormBoxProps {
@@ -37,4 +58,5 @@ export interface FormBoxProps {
   nameStyling?: string;
   sectionNameStyling?: string;
   blocksContainerStyling?: string;
+  allReadOnly?: boolean;
 }
